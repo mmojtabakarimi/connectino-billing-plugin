@@ -1,5 +1,5 @@
 paths:
-  /surveys:
+  /Rating:
     get:
       summary: List All Ratings
       description: '**Required ACL:** `confd.billing.read`'

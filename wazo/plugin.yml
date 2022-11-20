@@ -1,0 +1,7 @@
+name: wazo-confd-billing
+namespace: connectino
+version: 1.0.0
+author: Mojtaba Karimi
+display_name: Connectino Billing
+description: This plugin install billing
+homepage: https://github.com/mmojtabakarimi/connectinio-billing-plugin.git

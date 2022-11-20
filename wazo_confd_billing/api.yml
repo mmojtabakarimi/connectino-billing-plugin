@@ -1,0 +1,71 @@
+paths:
+  /surveys:
+    get:
+      summary: List All Ratings
+      description: '**Required ACL:** `confd.billing.read`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/RatingItems'
+
+
+definitions:
+  RatingItems:
+    title: RatingItems
+    allOf:
+      - properties:
+          id:
+            type: integer
+            readOnly: true
+            description: The id of the billing list
+          tenant_uuid:
+            type: string
+            readOnly: true
+            description: The tenant UUId
+          agent_id:
+            type: string
+            readOnly: true
+            description: The tenant UUId
+          agent_number:
+            type: string
+            readOnly: true
+            description: The agent_number
+          queue_id:
+            type: string
+            readOnly: true
+            description: The queue_id
+          queue_name:
+            type: string
+            readOnly: true
+            description: The queue_name
+          queue_number:
+            type: string
+            readOnly: true
+            description: queue_number
+          call_id:
+            type: string
+            readOnly: true
+            description: call_id
+          timestamp:
+            type: string
+            readOnly: true
+            description: The timestamp
+          rate:
+            type: string
+            readOnly: true
+            description: The rate
+
+parameters:
+  tenantuuid:
+    name: Wazo-Tenant
+    type: string
+    in: header
+    description: "The tenant's UUID, defining the ownership of a given resource."
+    required: false

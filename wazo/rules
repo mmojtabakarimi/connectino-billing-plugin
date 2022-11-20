@@ -1,8 +1,5 @@
 #!/bin/sh
 
-WAZO_AGID="/usr/lib/python2.7/dist-packages/wazo_agid"
-AGI="/usr/local/bin/"
-
 case "$1" in
 build)
     python3 setup.py bdist -d dist/python3
@@ -24,7 +21,6 @@ install)
 
 uninstall)
     echo "--------------Start to remove files"
-
     echo "---------- Finish remove files"
 
     systemctl restart wazo-confd

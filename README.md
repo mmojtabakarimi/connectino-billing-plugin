@@ -21,5 +21,5 @@ wazo-plugind-cli -c "uninstall connectino/wazo-confd-survey"
 ``curl``
 
 ### Configuration
-Set the survey inquiry api url in `/etc/wazo-plugin-survey/survey_api_url`.
-The address should be something like this `https://YOUR_DOMAIN.com/api/confd/1.1/surveys/inquiry`
+Set the survey inquiry api url in `/etc/wazo-plugin-billing/billing_api_url`.
+The address should be something like this `https://YOUR_DOMAIN.com/api/confd/1.1/billing/inquiry`

@@ -1,11 +1,11 @@
 import logging
 
-from .billing.resource import RatingListResource
+from .billing.resource import RatingListResource, BillingItemResource
 from .billing.services import build_rating_service
+from wazo_call_logd_client import Client as CallLogdClient
 from .db import init_db
 
 logger = logging.getLogger(__name__)
-
 
 class Plugin:
     def load(self, dependencies):
@@ -13,8 +13,12 @@ class Plugin:
         init_db(
             'postgresql://asterisk:proformatique@localhost/asterisk?application_name=wazo-billing-plugin')
         api = dependencies['api']
-        rating_service = build_rating_service()
-        #queuefeature_service = build_queuefeature_service()
+
+        token_changed_subscribe = dependencies['token_changed_subscribe']
+        call_logd_client = CallLogdClient('localhost', verify_certificate=False)
+        token_changed_subscribe(call_logd_client.set_token)
+
+        rating_service = build_rating_service(call_logd_client)
 
         # Get all Ratings
         api.add_resource(
@@ -24,12 +28,12 @@ class Plugin:
             resource_class_args=(rating_service,)
         )
 
-#         # Get all survey by agent_id
-#         api.add_resource(
-#             SurveyAgentItemResource,
-#             '/surveys/agent/<agent_id>',
-#             resource_class_args=(survey_service,)
-#         )
+        #Get all 
+        api.add_resource(
+            BillingItemResource,
+            '/billings/aparty/<aparty_number>',
+            resource_class_args=(rating_service,)
+        )
 #
 #         # Get all survey b queue_id
 #         api.add_resource(

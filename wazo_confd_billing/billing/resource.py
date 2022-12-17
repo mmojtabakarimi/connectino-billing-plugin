@@ -11,32 +11,46 @@ import json
 
 logger = logging.getLogger(__name__)
 
+
 class RatingListResource(ListResource):
     schema = RatingSchema
     model = RatingModel
 
     def build_headers(self, model):
-        return {'Location': url_for('ratings', uuid=model.id, _external=True)}
+        return {'Location': url_for('rating', uuid=model.id, _external=True)}
 
-    @required_acl('confd.ratings.read')
+    @required_acl('confd.rating.read')
     def get(self):
         return super().get()
 
-#
-# class SurveyAgentItemResource(ItemResource):
-#     def __init__(self, service):
-#         self.service = service
-#         self.schema = SurveySchema
-#         self.model = SurveyModel
-#
-#     @required_acl('confd.surveys.read')
-#     def get(self, agent_id):
-#         tenant_uuid = request.headers.get('Wazo-Tenant')
-#         survey_list = self.service.get_all_survey_by_agent_id(
-#             tenant_uuid, agent_id)
-#         return {'total': survey_list.count(), 'items': self.schema().dump(survey_list, many=True)}
-#
-#
+    @required_acl('confd.rating.create')
+    def post(self):
+        return super().post()
+
+    @required_acl('confd.rating.update')
+    def put(self, uuid):
+        return super().put(uuid)
+
+
+class BillingItemResource(ListResource):
+    schema = RatingSchema
+    model = RatingModel
+
+    def build_headers(self, model):
+        return {'Location': url_for('rating', uuid=model.id, _external=True)}
+
+    @required_acl('confd.billing.read')
+    def get(self, aparty_number):
+        tenant_uuid = request.headers.get('Wazo-Tenant')
+        from_date = request.args.get('start')
+        until_date = request.args.get('end')
+        bulk = self.service.get_all_billing_by_aparty_number(
+            tenant_uuid, aparty_number, from_date, until_date)
+        ratings = super().get()
+
+        rated_cdr = self.service.calculate_rating(bulk, ratings)
+        return {'total': '1', 'items': rated_cdr}
+
 # class SurveyQueueItemResource(ItemResource):
 #     def __init__(self, service):
 #         self.service = service

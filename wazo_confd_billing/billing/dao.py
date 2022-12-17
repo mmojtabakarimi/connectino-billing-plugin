@@ -9,12 +9,17 @@ from datetime import timedelta
 def _ratingPersistor(session, tenant_uuids=None):
     return RatingPersistor(session, rating_search, tenant_uuids)
 
-def get_all_ratins(tenant_uuid, queue_id):
-    return _ratingPersistor().get_all_ratingss(tenant_uuid)
+
+def get_all_ratins(tenant_uuid):
+    return _ratingPersistor().get_all_ratings(tenant_uuid)
 
 
+def search(tenant_uuids=None, **parameters):
+    return _ratingPersistor(tenant_uuids).search(parameters)
 
 
+def get_by(tenant_uuids=None, **criteria):
+    return _ratingPersistor(tenant_uuids).get_by(criteria)
 
 #
 #

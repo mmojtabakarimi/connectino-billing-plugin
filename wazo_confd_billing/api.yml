@@ -1,10 +1,10 @@
 paths:
-  /Rating:
+  /rating:
     get:
       summary: List All Ratings
       description: '**Required ACL:** `confd.billing.read`'
       tags:
-        - ratings
+        - rating
       parameters:
         - $ref: '#/parameters/tenantuuid'
       responses:
@@ -14,7 +14,74 @@ paths:
             application/json:
               schema:
                 $ref: '#/definitions/RatingItems'
+    post:
+      summary: Add Rating
+      description: '**Required ACL:** `confd.rating.create`'
+      tags:
+        - rating
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - name: body
+          in: body
+          description: Raing to create
+          required: true
+          schema:
+            $ref: '#/components/schemas/RatingList' 
+      responses:
+        '201':
+          description: Rating created
+          schema:
+            $ref: '#/definitions/RatingItems'                
+        '400':
+          $ref: '#/responses/CreateError'
 
+  /billing/aparty/{aparty_number}:
+    get:
+      summary: List billing bulk for aparty_number
+      description: '**Required ACL:** `confd.billing.read`'
+      tags:
+        - billing
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/aparty_number'
+        - name: start
+          in: query
+          description: Start Search Date
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: end
+          in: query
+          description: End search Date
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/BulkItems'
+
+components:
+  schemas:
+    RatingList:
+      type: object
+      properties:
+        queue_id:
+          type: string
+          example: 1
+        play_agentnumber_enable:
+          type: string
+          example: 0
+        queue_survey_enable:
+          type: string
+          example: 1
+      xml:
+        name: RatingList
 
 definitions:
   RatingItems:
@@ -69,3 +136,9 @@ parameters:
     in: header
     description: "The tenant's UUID, defining the ownership of a given resource."
     required: false
+  aparty_number:
+    required: true
+    type: integer
+    name: aparty_number
+    in: path
+    description: Aparty Number

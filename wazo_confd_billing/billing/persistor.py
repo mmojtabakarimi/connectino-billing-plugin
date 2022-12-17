@@ -7,7 +7,7 @@ from .model import RatingModel
 class RatingPersistor(CriteriaBuilderMixin, BasePersistor):
     _search_table = RatingModel
 
-    def __init__(self, session, survey_search, tenant_uuids=None):
+    def __init__(self, session, rating_search, tenant_uuids=None):
         self.session = session
         self.search_system = rating_search
         self.tenant_uuids = tenant_uuids
@@ -24,19 +24,12 @@ class RatingPersistor(CriteriaBuilderMixin, BasePersistor):
         query = self.session.query(RatingModel)
         query = query.filter(RatingModel.tenant_uuid == tenant_uuid)
         return query
-#
-#     def get_all_survey_by_queue_id(self, tenant_uuid, queue_id):
-#         query = self.session.query(SurveyModel)
-#         query = query.filter(SurveyModel.tenant_uuid == tenant_uuid)
-#         query = query.filter(SurveyModel.queue_id == queue_id)
-#         return query
-#
-#     def get_all_survey_by_agent_id(self, tenant_uuid, agent_id):
-#         query = self.session.query(SurveyModel)
-#         query = query.filter(SurveyModel.tenant_uuid == tenant_uuid)
-#         query = query.filter(SurveyModel.agent_id == agent_id)
-#         return query
-#
+
+    # def get_all_survey_by_queue_id(self, tenant_uuid, queue_id):
+    #     query = self.session.query(SurveyModel)
+    #     query = query.filter(SurveyModel.tenant_uuid == tenant_uuid)
+    #     query = query.filter(SurveyModel.queue_id == queue_id)
+    #     return query
 #     def get_average_survey_by_queue_id(self, tenant_uuid, queue_id, from_date, until_date):
 #         query = self.session.query(SurveyModel)
 #         query = query.filter(SurveyModel.tenant_uuid == tenant_uuid)

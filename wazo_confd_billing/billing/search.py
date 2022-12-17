@@ -12,4 +12,5 @@ rating_config = SearchConfig(
     default_sort='id',
 )
 
+
 rating_search = SearchSystem(rating_config)

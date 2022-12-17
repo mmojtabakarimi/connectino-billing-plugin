@@ -1,10 +1,10 @@
 paths:
-  /rating:
+  /ratings:
     get:
       summary: List All Ratings
       description: '**Required ACL:** `confd.billing.read`'
       tags:
-        - rating
+        - ratings
       parameters:
         - $ref: '#/parameters/tenantuuid'
       responses:
@@ -18,7 +18,7 @@ paths:
       summary: Add Rating
       description: '**Required ACL:** `confd.rating.create`'
       tags:
-        - rating
+        - ratings
       parameters:
         - $ref: '#/parameters/tenantuuid'
         - name: body
@@ -34,6 +34,58 @@ paths:
             $ref: '#/definitions/RatingItems'                
         '400':
           $ref: '#/responses/CreateError'
+  /ratings/{rating-id}:   
+    get:
+      summary: Get Rating by id
+      description: '**Required ACL:** `confd.rating.create`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/rating-id'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/RatingItems'    
+    put:
+      summary: Edit Rating by id
+      description: '**Required ACL:** `confd.rating.create`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - name: body
+          in: body
+          description: Raing to edit
+          required: true
+          schema:
+            $ref: '#/components/schemas/RatingList' 
+      responses:
+        '201':
+          description: Rating created
+          schema:
+            $ref: '#/definitions/RatingItems'                
+        '400':
+          $ref: '#/responses/CreateError'
+    delete:
+      summary: Delete Rating by id
+      description: '**Required ACL:** `confd.rating.create`'
+      tags:
+        - ratings
+      parameters:
+        - $ref: '#/parameters/tenantuuid'
+        - $ref: '#/parameters/rating-id'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/RatingItems'
+
 
   /billing/aparty/{aparty_number}:
     get:
@@ -71,15 +123,27 @@ components:
     RatingList:
       type: object
       properties:
-        queue_id:
+        trunk_provider_name:
+          type: string
+          example: "trunk"
+        local:
           type: string
           example: 1
-        play_agentnumber_enable:
-          type: string
-          example: 0
-        queue_survey_enable:
+        national:
           type: string
           example: 1
+        mobile:
+          type: string
+          example: 1
+        international:
+          type: string
+          example: 1
+        currency:
+          type: string
+          example: "RLS"
+        free:
+          type: 
+          example: 0          
       xml:
         name: RatingList
 
@@ -88,46 +152,38 @@ definitions:
     title: RatingItems
     allOf:
       - properties:
-          id:
-            type: integer
-            readOnly: true
-            description: The id of the billing list
           tenant_uuid:
             type: string
             readOnly: true
             description: The tenant UUId
-          agent_id:
+          trunk_provider_name:
             type: string
             readOnly: true
-            description: The tenant UUId
-          agent_number:
+            description: The trunk provider name
+          local:
             type: string
             readOnly: true
-            description: The agent_number
-          queue_id:
+            description: The local  rate
+          national:
             type: string
             readOnly: true
-            description: The queue_id
-          queue_name:
+            description: The national rate
+          mobile:
             type: string
             readOnly: true
-            description: The queue_name
-          queue_number:
+            description: The mobile rate
+          international:
             type: string
             readOnly: true
-            description: queue_number
-          call_id:
+            description: Teh international rate
+          currecncy:
             type: string
             readOnly: true
-            description: call_id
-          timestamp:
+            description: The Currency unit
+          free:
             type: string
             readOnly: true
-            description: The timestamp
-          rate:
-            type: string
-            readOnly: true
-            description: The rate
+            description: The Free Flag
 
 parameters:
   tenantuuid:

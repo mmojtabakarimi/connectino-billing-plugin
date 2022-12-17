@@ -10,8 +10,5 @@ class RatingSchema(BaseSchema):
     national = fields.String(dump_only=False)
     mobile = fields.String(dump_only=False)
     international = fields.String(dump_only=False)
-    cost = fields.String(dump_only=False)
     currency = fields.String(dump_only=False)
     free = fields.String(dump_only=False)
-    timestamp = fields.String(dump_only=True)
-    reserved = fields.String(dump_only=True)

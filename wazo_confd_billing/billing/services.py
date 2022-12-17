@@ -10,6 +10,8 @@ class RatingService(CRUDService):
     def __init__(self, call_logd_client, dao, validator, notifier):
         self.call_logd_client = call_logd_client
         self.dao = dao
+        self.validator = validator
+        self.notifier = notifier
 
     def get_all_ratings(self, tenant_uuid):
         return self.dao.get_all_ratings(tenant_uuid)
@@ -28,8 +30,8 @@ class RatingService(CRUDService):
                     for key, value in cdr.items():
                         if (key == 'answered'):
                             if (value == True):
-                                rate = self.find_rate(ratings, cdr['destination_line_identity'], cdr['duration'],
-                                                      cdr['call_type'])
+                                rate = self.find_rate(
+                                    ratings, cdr['destination_line_identity'], cdr['duration'], cdr['call_type'])
                                 cdr['rate'] = rate
                                 rated_cdr.append(cdr)
         return rated_cdr
@@ -42,13 +44,17 @@ class RatingService(CRUDService):
                 if (key == 'provider_name'):
                     if (value == provider_name):
                         if int(call_type) == 1:
-                            cost = str((-(-int(duration) // 60)) * int(rating['local']))
+                            cost = str((-(-int(duration)//60))
+                                       * int(rating['local']))
                         if int(call_type) == 2:
-                            cost = str((-(-int(duration) // 60)) * int(rating['national']))
+                            cost = str((-(-int(duration)//60))
+                                       * int(rating['national']))
                         if int(call_type) == 3:
-                            cost = str((-(-int(duration) // 60)) * int(rating['mobile']))
+                            cost = str((-(-int(duration)//60))
+                                       * int(rating['mobile']))
                         if int(call_type) == 4:
-                            cost = str((-(-int(duration) // 60)) * int(rating['international']))
+                            cost = str((-(-int(duration)//60)) *
+                                       int(rating['international']))
         return cost
 
 

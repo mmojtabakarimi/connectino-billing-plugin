@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "3938e39d-f801-4475-8ce4-ccab93b17b1e",
+		"name": "Rating& Billing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14694010"
+	},
+	"item": [
+		{
+			"name": "Get All ratings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Wazo-Tenant",
+						"value": "d12fd182-eefe-4c05-9a52-93a8dff337ec",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "cd73399b-8492-4161-9f06-fc7291237de3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://172.16.14.197:443/api/confd/1.1/ratings",
+					"protocol": "https",
+					"host": [
+						"172",
+						"16",
+						"14",
+						"197"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"confd",
+						"1.1",
+						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add rating",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Wazo-Tenant",
+						"value": "d12fd182-eefe-4c05-9a52-93a8dff337ec",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "cd73399b-8492-4161-9f06-fc7291237de3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tenant_uuid\": \"d12fd182-eefe-4c05-9a52-93a8dff337ec\",\r\n    \"provider_name\": \"shatel-siptrk002\",\r\n    \"local\": \"12\",\r\n    \"national\": \"34\",\r\n    \"mobile\": \"94\",\r\n    \"international\": \"1323\",\r\n    \"currency\": \"2\",\r\n    \"free\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://172.16.14.197:443/api/confd/1.1/ratings",
+					"protocol": "https",
+					"host": [
+						"172",
+						"16",
+						"14",
+						"197"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"confd",
+						"1.1",
+						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit rating",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Wazo-Tenant",
+						"value": "d12fd182-eefe-4c05-9a52-93a8dff337ec",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "cd73399b-8492-4161-9f06-fc7291237de3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"provider_name\": \"shatel-sip0trk20\",\r\n    \"local\": \"10\",\r\n    \"national\": \"3.004\",\r\n    \"mobile\": \"94\",\r\n    \"international\": \"1323\",\r\n    \"currency\": \"2\",\r\n    \"free\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://172.16.14.197:443/api/confd/1.1/ratings/17",
+					"protocol": "https",
+					"host": [
+						"172",
+						"16",
+						"14",
+						"197"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"confd",
+						"1.1",
+						"ratings",
+						"17"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get rating by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Wazo-Tenant",
+						"value": "d12fd182-eefe-4c05-9a52-93a8dff337ec",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "cd73399b-8492-4161-9f06-fc7291237de3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://172.16.14.197:443/api/confd/1.1/ratings/17",
+					"protocol": "https",
+					"host": [
+						"172",
+						"16",
+						"14",
+						"197"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"confd",
+						"1.1",
+						"ratings",
+						"17"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Raing",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Wazo-Tenant",
+						"value": "d12fd182-eefe-4c05-9a52-93a8dff337ec",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "cd73399b-8492-4161-9f06-fc7291237de3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"provider_name\": \"shatel-siptrk20\",\r\n    \"local\": \"120\",\r\n    \"national\": \"34\",\r\n    \"mobile\": \"94\",\r\n    \"international\": \"1323\",\r\n    \"currency\": \"2\",\r\n    \"free\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://172.16.14.197:443/api/confd/1.1/ratings/17",
+					"protocol": "https",
+					"host": [
+						"172",
+						"16",
+						"14",
+						"197"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"confd",
+						"1.1",
+						"ratings",
+						"17"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Billing",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Wazo-Tenant",
+						"value": "d12fd182-eefe-4c05-9a52-93a8dff337ec",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "cd73399b-8492-4161-9f06-fc7291237de3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://172.16.14.197:443/api/confd/1.1/billings/aparty/3434555?start=2022-11-05&end=2022-11",
+					"protocol": "https",
+					"host": [
+						"172",
+						"16",
+						"14",
+						"197"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"confd",
+						"1.1",
+						"billings",
+						"aparty",
+						"3434555"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2022-11-05"
+						},
+						{
+							"key": "end",
+							"value": "2022-11"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
